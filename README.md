@@ -3,7 +3,14 @@
 
 [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
 
-In this Homework assignment , We created a full stack web application.
+# Group 5 
+
+For Project 2, We built a full stack Web Application, allowing the user to sign into their account and manage a number of personal list.
+
+- Evan Chan
+- Roberto Vargas
+- Sabastian Ponce
+- Ryan Florez
 
 ## Table of Contents
 
@@ -14,11 +21,11 @@ In this Homework assignment , We created a full stack web application.
 
 ## User Story
 
-AS AN ...
+AS A  ... User
 
-I WANT to ...
+I WANT to ... Save items to personal lists.
 
-SO THAT I can ...
+SO THAT I can ... Come back and view the list and make additional edits.
 
 
 ## Acceptance Criteria
