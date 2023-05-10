@@ -18,6 +18,6 @@ app.set('view engine', 'handlebars');
 app.use(require('./controllers/list-routes'));
 
 // Starts the server to begin listening
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening on PORT' + PORT));
 });
