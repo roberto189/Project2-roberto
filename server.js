@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express');
 const exphbs = require('express-handlebars');
+const sequelize = require('./config/connection');
 const path = require('path');
 const hbs = exphbs.create({});
 
@@ -13,10 +14,10 @@ const PORT = process.env.PORT || 3001;
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./controllers/list-routes'));
 
 // Starts the server to begin listening
-app.listen(PORT, () => {
-  console.log('Server listening on: http://localhost:' + PORT);
+sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => console.log('Now listening on PORT' + PORT));
 });
