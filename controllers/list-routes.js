@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const {list, user, item} = require ("../models");
 // Here is where we provide hardcoded data to render dynamically
 const lists = [
   {
