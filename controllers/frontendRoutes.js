@@ -6,33 +6,7 @@ router.get("/", async (req,res) => {
     const listData = await List.findAll()
     const lists = listData.map((list) => list.get({ plain: true }));
     console.log(lists)
-    res.render('signup')
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-
-router.get("/login", async (req,res) => {
-  try {
-    if (req.session.userId) {
-      res.redirect("/")
-    } else {
-      res.render("login")
-    }
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-
-router.get("/signup", async (req,res) => {
-  try {
-    if (req.session.userId) {
-      res.redirect("/login")
-    } else {
-      res.render("signup")
-    }
+    res.render('login')
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
@@ -41,35 +15,30 @@ router.get("/signup", async (req,res) => {
 
 router.get("/listGen", async (req,res) => {
   try {
-    if (!req.session.userId) {
-      res.redirect("/login")
-    }
-    if (req.session.islistItems) {
-      const listData = await List.findByPk(req.session.userId, {
-        include: {
-          all: true,
-          nested: true
-        }
-      })
-      const List = listData.get({plain: true})
-      console.log(listData)
-      return res.render("listGen", {user: List, islistItems: true})
-    } else {
-      const userData = await User.findByPk(req.session.userId, {
-        include: {
-          all: true,
-          nested: true
-        }
-      })
-      const user = userData.get({plain: true})
-
-      return res.render("ListGen", {user: user, islistItems: false})
-    }
+    const listData = await List.findAll()
+    const lists = listData.map((list) => list.get({ plain: true }));
+    console.log(lists)
+    res.render('listGen')
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
   }
 })
+
+router.get("/lists", async (req,res) => {
+  try {
+    const listData = await List.findAll()
+    const lists = listData.map((list) => list.get({ plain: true }));
+    console.log(lists)
+    res.render('lists')
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error);
+  }
+})
+
+
+
 
 router.get('/new-user', (req, res) => {
   try {
