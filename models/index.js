@@ -1,11 +1,11 @@
-const list = require("./list");
-const user = require("./user");
-const item = require("./items");
+const List = require("./list");
+const User = require("./user");
+const Item = require("./items");
 
-user.hasMany(list)
-list.belongsTo(user)
+User.hasMany(List)
+List.belongsTo(User)
 
-list.hasMany(item)
-item.belongsTo(list)
+List.hasMany(Item)
+Item.belongsTo(List)
 
-module.exports = {list, user, item}
+module.exports = {List, User, Item}
