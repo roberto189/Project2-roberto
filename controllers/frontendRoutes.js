@@ -1,5 +1,5 @@
 const router = require ('express').Router();
-const{List} = require('../models');
+const{List, Item, User} = require('../models');
 
 router.get('/', async (req,res) => {
   try {
@@ -43,6 +43,27 @@ router.get('/dashboard', async (req,res) => {
   try {
     if (req.session.userId) {
       res.redirect('/login')
+    }
+    if (req.session.islistItems) {
+      const listData = await List.findByPk(req.session.userId, {
+        include: {
+          all: true,
+          nested: true
+        } 
+      })
+      const list = listData.get({plain: true})
+      console.log(listData)
+      return res.render("dashboard", {user: list, isList: true})
+    } else {
+      const userData = await User.findByPk(req.session.userId, {
+        include: {
+          all: true,
+          nested: true
+        }
+      })
+      const customer = customerData.get({plain: true})
+
+      return res.render("dashboard", {user: customer, isFarmer: false})
     }
   } catch (error) {
     console.log(error)
