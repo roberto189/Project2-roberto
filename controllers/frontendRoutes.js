@@ -1,33 +1,24 @@
-const router = require('express').Router();
-const { List, Item, User } = require('../models');
+const router = require("express").Router()
+const {List, Item, User} = require("../models")
 
-<<<<<<< HEAD
-router.get('/homepage', async (req,res) => {
-=======
-router.get('/', async (req, res) => {
->>>>>>> Dev
+router.get("/", async (req,res) => {
   try {
     const listData = await List.findAll()
     const lists = listData.map((list) => list.get({ plain: true }));
     console.log(lists)
-<<<<<<< HEAD
-    res.render('signup', {lists: lists, userId: req.session.userId, islistItems: req.session.islistItems})
-  }catch (error) {
-=======
-    res.render('all', { lists: lists })
+    res.render('signup')
   } catch (error) {
->>>>>>> Dev
     console.log(error)
     res.status(500).json(error);
   }
 })
 
-router.get('/login', async (req, res) => {
+router.get("/login", async (req,res) => {
   try {
     if (req.session.userId) {
-      res.redirect('/')
+      res.redirect("/")
     } else {
-      res.render('login')
+      res.render("login")
     }
   } catch (error) {
     console.log(error)
@@ -35,16 +26,12 @@ router.get('/login', async (req, res) => {
   }
 })
 
-<<<<<<< HEAD
-router.get('/', async (req,res) => {
-=======
-router.get('/signup', async (req, res) => {
->>>>>>> Dev
+router.get("/signup", async (req,res) => {
   try {
     if (req.session.userId) {
-      res.redirect('/login')
+      res.redirect("/login")
     } else {
-      res.render('signup')
+      res.render("signup")
     }
   } catch (error) {
     console.log(error)
@@ -52,10 +39,10 @@ router.get('/signup', async (req, res) => {
   }
 })
 
-router.get('/dashboard', async (req, res) => {
+router.get("/listGen", async (req,res) => {
   try {
-    if (req.session.userId) {
-      res.redirect('/login')
+    if (!req.session.userId) {
+      res.redirect("/login")
     }
     if (req.session.islistItems) {
       const listData = await List.findByPk(req.session.userId, {
@@ -64,9 +51,9 @@ router.get('/dashboard', async (req, res) => {
           nested: true
         }
       })
-      const list = listData.get({ plain: true })
+      const List = listData.get({plain: true})
       console.log(listData)
-      return res.render("dashboard", { user: list, isList: true })
+      return res.render("listGen", {user: List, islistItems: true})
     } else {
       const userData = await User.findByPk(req.session.userId, {
         include: {
@@ -74,9 +61,9 @@ router.get('/dashboard', async (req, res) => {
           nested: true
         }
       })
-      const customer = customerData.get({ plain: true })
+      const user = userData.get({plain: true})
 
-      return res.render("dashboard", { user: customer, isFarmer: false })
+      return res.render("ListGen", {user: user, islistItems: false})
     }
   } catch (error) {
     console.log(error)
@@ -87,48 +74,25 @@ router.get('/dashboard', async (req, res) => {
 router.get('/new-user', (req, res) => {
   try {
     if (!req.session.userId) {
-      res.redirect('/signup')
+      res.redirect('/login')
     }
-    res.render('newUser', { user: req.session.userId, islistItems: req.session.islistItems })
+    res.render('signup', { user: req.session.userId, islistItems: req.session.islistItems })
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
   }
 })
-
-router.get('/lists', (req, res) => {
-  try {
-    console.log("hello")
-    // if (!req.session.userId) {
-    //   res.redirect('/login')
-    // }
-    res.render('lists', { user: req.session.userId, islistItems: req.session.islistItems })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-
-
 router.get('/lists', (req, res) => {
   try {
     console.log('hello')
     // if (!req.session.userId) {
-    //   res.redirect(‘/login’)
-    // }
-    res.render('lists', { user: req.session.userId, islistItems: req.session.islistItems })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-router.get('/listGen', (req, res) => {
-  try {
-    res.render('listGen')
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
+      //   res.redirect('/login')
+      // }
+      res.render('lists', { user: req.session.userId, islistItems: req.session.islistItems })
+    } catch (error) {
+      console.log(error)
+      res.status(500).json(error);
+    }
+  })
 
-module.exports = router
+  module.exports = router
