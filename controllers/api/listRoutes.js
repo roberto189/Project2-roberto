@@ -27,10 +27,10 @@ router.get('/:id', async (req,res) => {
 
 router.post('/', async (req,res) => {
   try {
-    const newUser = await User.create(req.body);
-    if (req.body.itemIds) {
-      newUser.addItems(req.body.itemIds)
-    }
+    const newList = await List.create(req.body);
+    // if (req.body.itemIds) {
+    //   newUser.addItems(req.body.itemIds)
+    // }
     res.status(200).json(newUser)
   } catch (error) {
     console.log(error)
