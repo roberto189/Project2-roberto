@@ -73,10 +73,10 @@ router.get('/dashboard', async (req, res) => {
 
 router.get('/new-user', (req, res) => {
   try {
-    if (!req.session.userId) {
-      res.redirect('/login')
+    if (!req.session.userd) {
+      res.redirect('/')
     }
-    res.render('newUser', { user: req.session.userId, islistItems: req.session.islistItems })
+    res.render('signup', { user: req.session.userId, islistItems: req.session.islistItems })
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
