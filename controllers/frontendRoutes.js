@@ -1,11 +1,7 @@
 const router = require('express').Router();
 const { List, Item, User } = require('../models');
 
-<<<<<<< HEAD
-router.get('/homepage', async (req,res) => {
-=======
 router.get('/', async (req, res) => {
->>>>>>> Dev
   try {
     const listData = await List.findAll()
     const lists = listData.map((list) => list.get({ plain: true }));
@@ -35,11 +31,7 @@ router.get('/login', async (req, res) => {
   }
 })
 
-<<<<<<< HEAD
-router.get('/', async (req,res) => {
-=======
 router.get('/signup', async (req, res) => {
->>>>>>> Dev
   try {
     if (req.session.userId) {
       res.redirect('/login')
@@ -87,9 +79,9 @@ router.get('/dashboard', async (req, res) => {
 router.get('/new-user', (req, res) => {
   try {
     if (!req.session.userId) {
-      res.redirect('/signup')
+      res.redirect('/login')
     }
-    res.render('newUser', { user: req.session.userId, islistItems: req.session.islistItems })
+    res.render('signup', { user: req.session.userId, islistItems: req.session.islistItems })
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
@@ -103,28 +95,6 @@ router.get('/lists', (req, res) => {
     //   res.redirect('/login')
     // }
     res.render('lists', { user: req.session.userId, islistItems: req.session.islistItems })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-
-
-router.get('/lists', (req, res) => {
-  try {
-    console.log('hello')
-    // if (!req.session.userId) {
-    //   res.redirect(‘/login’)
-    // }
-    res.render('lists', { user: req.session.userId, islistItems: req.session.islistItems })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-router.get('/listGen', (req, res) => {
-  try {
-    res.render('listGen')
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
