@@ -4,24 +4,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>header</title>
-    <link rel="stylesheet" href="/Project2/Assets/css/style.css">
+    <link rel="stylesheet" href="/Assets/css/style.css">
 </head>
 <body>
-
+<nav class="top-navigation">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">Title</div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
-                <a href="listGen">Home</a>
+            <div class="col-sm-6 col-md-6 col-lg-6 title" id="title">EZlists</div>
+            <div class="col-sm-2 col-md-2 col-lg-2"id="Home">
+                <button id="home-btn">
+                <a id="home-btn" href="listGen">Home</a>
+                </button>
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
-                <a href="lists">Lists</a>
+            <div class="col-sm-2 col-md-2 col-lg-2" id="lists">
+                <button id="lists-btn">
+                <a id="lists-btn" href="lists">Lists</a>
+                </button>
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
-            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2"></div>
         </div>
     </div>
-
+</nav>
     <main class="container container-fluid-mt-5">
         {{{ body }}}
     </main>
