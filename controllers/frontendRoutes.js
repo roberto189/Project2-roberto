@@ -1,11 +1,25 @@
 const router = require("express").Router()
-const {List, Item, User} = require("../models")
+const {List, Item, User, Item} = require("../models")
 
 router.get("/", async (req,res) => {
   try {
     const listData = await List.findAll()
     const lists = listData.map((list) => list.get({ plain: true }));
     console.log(lists)
+    res.render('all', { lists: lists })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error);
+  }
+})
+
+router.get('/login', async (req, res) => {
+  try {
+    if (req.session.userId) {
+      res.redirect('/')
+    } else {
+      res.render('login')
+    }
     res.render('login')
   } catch (error) {
     console.log(error)
