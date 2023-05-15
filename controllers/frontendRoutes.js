@@ -6,13 +6,8 @@ router.get('/', async (req, res) => {
     const listData = await List.findAll()
     const lists = listData.map((list) => list.get({ plain: true }));
     console.log(lists)
-<<<<<<< HEAD
-    res.render('signup', {lists: lists, userId: req.session.userId, islistItems: req.session.islistItems})
-  }catch (error) {
-=======
     res.render('all', { lists: lists })
   } catch (error) {
->>>>>>> Dev
     console.log(error)
     res.status(500).json(error);
   }
