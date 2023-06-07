@@ -1,81 +1,87 @@
 const router = require("express").Router()
-const {List, Item, User} = require("../models")
+const {Shoe, Customer, Retailer, Trait} = require("../models")
 
 router.get("/", async (req,res) => {
   try {
-    const listData = await List.findAll()
-    const lists = listData.map((list) => list.get({ plain: true }));
-    console.log(lists)
-    res.render('all', { lists: lists })
+    const ShoeData = await Shoe.findAll()
+    const Shoes = ShoeData.map((Shoe) => Shoe.get({ plain: true }));
+    console.log(Shoes)
+    res.render("home", {Shoes: Shoes, userId: req.session.userId, isRetailer: req.session.isRetailer})
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
   }
 })
 
-router.get('/login', async (req, res) => {
+router.get("/login", async (req,res) => {
   try {
     if (req.session.userId) {
-      res.redirect('/')
+      res.redirect("/")
     } else {
-      res.render('login')
+      res.render("login")
     }
-    res.render('login')
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
   }
 })
 
-router.get("/listGen", async (req,res) => {
+router.get("/signup", async (req,res) => {
   try {
-    const listData = await List.findAll()
-    const lists = listData.map((list) => list.get({ plain: true }));
-    console.log(lists)
-    res.render('listGen')
+    if (req.session.userId) {
+      return res.redirect("/dashboard")
+    } else {
+      res.render("signup")
+    }
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
   }
 })
 
-router.get("/lists", async (req,res) => {
-  try {
-    const listData = await List.findAll()
-    const lists = listData.map((list) => list.get({ plain: true }));
-    console.log(lists)
-    res.render('lists')
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error);
-  }
-})
-
-
-
-
-router.get('/new-user', (req, res) => {
+router.get("/dashboard", async (req,res) => {
   try {
     if (!req.session.userId) {
-      res.redirect('/login')
+      return res.redirect("/login")
     }
-    res.render('signup', { user: req.session.userId, islistItems: req.session.islistItems })
+    if (req.session.isRetailer) {
+      const RetailerData = await Retailer.findByPk(req.session.userId, {
+        include: {
+          all: true,
+          nested: true
+        }
+      })
+      const Retailer = RetailerData.get({plain: true})
+      console.log(RetailerData)
+      return res.render("dashboard", {user: Retailer, isRetailer: true})
+    } else {
+      const customerData = await Customer.findByPk(req.session.userId, {
+        include: {
+          all: true,
+          nested: true
+        }
+      })
+      const customer = customerData.get({plain: true})
+
+      return res.render("dashboard", {user: customer, isRetailer: false})
+    }
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
   }
 })
-router.get('/lists', (req, res) => {
-  try {
-    console.log('hello')
-    // if (!req.session.userId) {
-      //   res.redirect('/login')
-      // }
-      res.render('lists', { user: req.session.userId, islistItems: req.session.islistItems })
-    } catch (error) {
-      console.log(error)
-      res.status(500).json(error);
-    }
-  })
 
-  module.exports = router
+router.get("/new-Shoe", (req,res) => {
+  try {
+    if (!req.session.userId) {
+      res.redirect("/login")
+    }
+    res.render("newShoe", {user: req.session.userId, isRetailer: req.session.isRetailer})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error);
+    
+  }
+})
+
+module.exports = router

@@ -5,12 +5,9 @@
 
 # Group 5 
 
-For Project 2, We built a full stack Web Application, allowing the user to sign into their account and manage a number of personal list.
+For Project 2, I built a full stack Web Application, which allows retailers to sell shoes to customers
 
-- Evan Chan
 - Roberto Vargas
-- Sabastian Ponce
-- Ryan Florez
 
 ## Table of Contents
 
@@ -46,7 +43,3 @@ SO THAT I can ... Come back and view the list and make additional edits.
 * Include Image HERE
 
 ## 💡 Notes
-
-Some additional notes on the written code:
-
-1. describe methods used...

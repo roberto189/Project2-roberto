@@ -1,23 +1,19 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class list extends Model {}
+class Trait extends Model {}
 
-list.init(
+Trait.init(
   {
-    listname: {
+    trait: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    },
 
-{
+  },
+  {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'list',
   }
 );
 
-    module.exports = list;
+module.exports = Trait;

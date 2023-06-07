@@ -1,10 +1,13 @@
-const router = require('express').Router()
-const listRoutes = require('./listRoutes')
-const itemRoutes = require('./itemRoutes')
-const userRoutes = require('./userRoutes')
+const router = require("express").Router()
+const shoeRoutes = require("./shoeRoutes")
+const traitRoutes = require("./traitRoutes")
+const retailerRoutes = require("./retailerRoutes")
+const customerRoutes = require("./customerRoutes")
 
-router.use('/lists', listRoutes)
-router.use('/items', itemRoutes)
-router.use('/users', userRoutes)
+router.use("/Shoes", shoeRoutes)
+router.use("/traits", traitRoutes)
+router.use("/Retailers", retailerRoutes)
+router.use("/customers", customerRoutes)
+
 
 module.exports = router

@@ -1,11 +1,17 @@
-const List = require("./list");
-const User = require("./user");
-const Item = require("./items");
+const Shoe = require("./Shoe")
+const Trait = require("./Trait")
+const Retailer = require("./Retailer")
+const Customer = require("./Customer")
 
-User.hasMany(List)
-List.belongsTo(User)
+Shoe.belongsToMany(Trait, {through: "ShoeTraits"}) // many-to-many
+Trait.belongsToMany(Shoe, {through: "ShoeTraits"})
 
-List.hasMany(Item)
-Item.belongsTo(List)
+Retailer.hasMany(Shoe) // one-to-many
+Shoe.belongsTo(Retailer)
 
-module.exports = {List, User, Item}
+
+Customer.hasMany(Shoe) // one-to-many
+Shoe.belongsTo(Customer)
+
+
+module.exports = {Shoe,Trait, Customer, Retailer}

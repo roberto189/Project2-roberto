@@ -1,0 +1,20 @@
+<div>
+  <h1>Welcome {{user.username}}</h1>
+  {{#if isRetailer}}
+  <h3>You are a Retailer</h3>
+  {{else}}
+  <h3>You are a customer</h3>
+  {{/if}}
+  <ul>
+  {{#each user.Shoes}}
+    <div>
+      <p>Shoe: {{name}}</p>
+      <p>Traits:</p>
+      <div>{{#each Traits}}
+          <p>{{trait}}</p>
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
+  </ul>
+</div>
