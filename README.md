@@ -40,6 +40,6 @@ SO THAT I can ... Come back and view the list and make additional edits.
 
 ## Example Image
 
-* Include Image HERE
+Screenshot 2023-06-11 132920.png
 
 ## 💡 Notes
