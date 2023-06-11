@@ -23,7 +23,7 @@ Customer.init(
     },
     ShoeCapacity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      // allowNull: false
     }
   },
   {

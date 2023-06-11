@@ -21,6 +21,8 @@ const signup = async (e) => {
     }
   // customer signup
   } else {
+    console.log("username",document.querySelector("#username-input").value)
+    console.log("password",document.querySelector("#username-input").value)
     const response = await fetch("/api/customers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,6 +31,7 @@ const signup = async (e) => {
         password: document.querySelector("#password-input").value,
       }),
     });
+    console.log("response signup response",response)
     if (response.status === 200) {
       window.location.assign("/dashboard")
     } else {
