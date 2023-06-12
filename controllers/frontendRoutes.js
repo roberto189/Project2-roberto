@@ -76,7 +76,7 @@ router.get("/new-Shoe", (req,res) => {
     if (!req.session.userId) {
       res.redirect("/login")
     }
-    res.render("newShoe", {user: req.session.userId, isRetailer: req.session.isRetailer})
+    res.render("newshoe", {user: req.session.userId, isRetailer: req.session.isRetailer})
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
